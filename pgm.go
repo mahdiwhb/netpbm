@@ -297,13 +297,3 @@ func (pgm *PGM) ToPBM() *PBM {
 	}
 	return pbm
 }
-
-// PrintData prints the pixel data of the image to the console.
-func (pgm *PGM) PrintData() {
-	for i := 0; i < pgm.height; i++ {
-		for j := 0; j < pgm.width; j++ {
-			fmt.Printf("%d ", pgm.data[i][j])
-		}
-		fmt.Println()
-	}
-}

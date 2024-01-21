@@ -206,17 +206,3 @@ func (pbm *PBM) Flop() {
 func (pbm *PBM) SetMagicNumber(magicNumber string) {
 	pbm.magicNumber = magicNumber
 }
-
-// PrintData prints the pixel data of the PBM image to the console.
-func (pbm *PBM) PrintData() {
-	for y := 0; y < pbm.height; y++ {
-		for x := 0; x < pbm.width; x++ {
-			if pbm.data[y][x] {
-				fmt.Print("1 ")
-			} else {
-				fmt.Print("0 ")
-			}
-		}
-		fmt.Println()
-	}
-}

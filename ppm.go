@@ -298,13 +298,6 @@ type Point struct {
 	X, Y int
 }
 
-// rgbToGray converts an RGB color to a grayscale value.
-func rgbToGray(color Pixel) uint8 {
-	// Use luminosity method for converting RGB to grayscale
-	// Gray = 0.299*R + 0.587*G + 0.114*B
-	return uint8(0.299*float64(color.R) + 0.587*float64(color.G) + 0.114*float64(color.B))
-}
-
 func (ppm *PPM) ToPBM() *PBM {
 	pbm := &PBM{
 		width:       ppm.width,
@@ -486,34 +479,6 @@ func (ppm *PPM) DrawFilledCircle(center Point, radius int, color Pixel) {
 			ppm.setPixel(x, center.Y*2-yi, color)
 		}
 	}
-}
-func (ppm *PPM) drawHorizontalLine(x1, x2, y int, color Pixel) {
-	// Ensure valid y-coordinate.
-	if y < 0 || y >= ppm.height {
-		return
-	}
-
-	// Ensure x1 is less than or equal to x2.
-	if x1 > x2 {
-		x1, x2 = x2, x1
-	}
-
-	// Clip x-coordinates to the image bounds.
-	x1 = clamp(x1, 0, ppm.width-1)
-	x2 = clamp(x2, 0, ppm.width-1)
-
-	for x := x1; x <= x2; x++ {
-		ppm.setPixel(x, y, color)
-	}
-}
-func clamp(value, min, max int) int {
-	if value < min {
-		return min
-	}
-	if value > max {
-		return max
-	}
-	return value
 }
 
 // DrawTriangle draws a triangle.
